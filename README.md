@@ -46,7 +46,8 @@ fi
 
 echo "Loading '\$profile'"
 
-openrgb --profile "\$profile"
+hasFailed="\$(openrgb --profile "\$profile"| grep -i 'failed' | grep -i 'profile')"
+exit \$(test -z "\$hasFailed")
 EOF
 ```
 We need to set the correct permissions for the executable. Run:
@@ -66,6 +67,7 @@ Type=oneshot
 StandardOutput=journal
 ExecStart=openrgb-load-profile
 RemainAfterExit=yes
+Restart=on-failure
 
 [Install]
 WantedBy=default.target
