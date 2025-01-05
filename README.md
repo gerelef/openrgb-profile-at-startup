@@ -57,7 +57,7 @@ sudo chown root:root "/usr/local/bin/openrgb-load-profile" && sudo chmod 755 "/u
 
 Now, we need to create a `systemd` service (unit file), which will load our OpenRGB script at first login.
 ```bash
-tee "~/openrgb.service" <<EOF
+tee "~/.config/systemd/user/openrgb.service" <<EOF
 [Unit]
 Description=Open source RGB lighting control that doesn't depend on manufacturer software.
 After=graphical.target
@@ -76,7 +76,7 @@ EOF
 
 Now, we just need to enable this service.
 ```bash
-systemctl enable --user --now "~/openrgb.service"
+systemctl enable --user --now openrgb.service
 ```
 Done! The changes will take effect immediately.
 
